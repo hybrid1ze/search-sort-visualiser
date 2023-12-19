@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import { useState, useEffect } from "react";
 
 const generateRandomArray = (size: number, max: number) =>
@@ -13,8 +13,6 @@ const BinarySearch = () => {
   const [right, setRight] = useState<number>(0);
   const [mid, setMid] = useState<number | null>(null);
   const [isFound, setIsFound] = useState<boolean | null>(null);
-
-  
 
   useEffect(() => {
     resetArray();
@@ -31,17 +29,15 @@ const BinarySearch = () => {
 
   const binarySearchStep = () => {
     if (left <= right) {
-      const mid = Math.floor((left + right) / 2);
-      setMid(mid);
+      const midIndex = Math.floor((left + right) / 2);
+      setMid(midIndex);
 
-      if (array[mid] === target) {
+      if (array[midIndex] === target) {
         setIsFound(true);
-        return;
-      }
-      if (array[mid] < target) {
-        setLeft(mid + 1);
+      } else if (array[midIndex] < target) {
+        setLeft(midIndex + 1);
       } else {
-        setRight(mid - 1);
+        setRight(midIndex - 1);
       }
     } else {
       setIsFound(false);
@@ -50,24 +46,10 @@ const BinarySearch = () => {
 
   return (
     <div className="p-4">
-      <div>
-        <input
-          type="text"
-          className="border-2 border-gray-200 p-2"
-          placeholder="Enter a number to search"
-          value={target}
-          onChange={(e) => setTarget(parseInt(e.target.value) || 0)}
-        />
-        <button
-          onClick={binarySearchStep}
-          className="bg-blue-500 text-white p-2 ml-2"
-        >
-          Search Step
-        </button>
-        <button onClick={resetArray} className="bg-red-500 text-white p-2 ml-2">
-          Reset
-        </button>
+      <div className="flex justify-center text-4xl">
+        <h1>Binary Search Visualisation</h1>
       </div>
+      
       <div className="mt-4 flex justify-center">
         {array.map((value, index) => (
           <span 
@@ -81,11 +63,31 @@ const BinarySearch = () => {
           </span>
         ))}
       </div>
+
       {isFound !== null && (
-        <div className="mt-4">
+        <div className="mt-4 mb-4 flex justify-center">
             {isFound ? 'Element found!' : 'Element not found.' }
         </div>
       )}
+
+<div className="mt-4 mb-4 flex justify-center">
+        <input
+          type="text"
+          className="border-2 border-gray-200 p-2"
+          placeholder="Enter a number to search"
+          value={target}
+          onChange={(e) => setTarget(parseInt(e.target.value) || 0)}
+        />
+        <button
+          onClick={binarySearchStep}
+          className="bg-blue-500 text-white p-2 ml-2"
+        >
+          Next Step
+        </button>
+        <button onClick={resetArray} className="bg-red-500 text-white p-2 ml-2">
+          Reset
+        </button>
+      </div>
     </div>
   );
 };
