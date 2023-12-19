@@ -88,6 +88,36 @@ const BinarySearch = () => {
           Reset
         </button>
       </div>
+      <div className="flex flex-row justify-between pt-32 px-8 ">
+        <div>
+          <span className="underline decoration-green-500 text-2xl">Pros</span>
+          <ul className="list-disc">
+            <li>
+            A very efficient algorithm for large lists or arrays, as the time complexity is O(log n), where n is the number of elements in the list.
+            </li>
+            <li>
+            Works only on sorted lists or arrays but can be faster than linear search on a sorted list.
+            </li>
+            <li>
+            It is easy to understand and implement.
+            </li>
+          </ul>
+        </div>
+        <div>
+        <span className="underline decoration-red-500 text-2xl">Cons</span>
+        <ul className="list-disc">
+          <li>
+          Requires the entire array to be sorted before performing the search, which can add extra overhead if the list is not already sorted.
+          </li>
+          <li>
+          It requires random access to elements in the list, which can be a disadvantage in some data structures.
+          </li>
+          <li>
+          It may require extra memory to maintain indices or pointers to the search interval.
+          </li>
+        </ul>
+        </div>
+      </div>
     </div>
   );
 };
