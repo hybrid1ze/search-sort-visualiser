@@ -88,10 +88,10 @@ const BinarySearch = () => {
           Reset
         </button>
       </div>
-      <div className="flex flex-row justify-between pt-32 px-8 ">
-        <div>
+      <div className="flex flex-row justify-between pt-32 px-2  ">
+        <div className="outline outline-2 outline-slate-100 p-5">
           <span className="underline decoration-green-500 text-2xl">Pros</span>
-          <ul className="list-disc">
+          <ul className="list-disc pl-5">
             <li>
             A very efficient algorithm for large lists or arrays, as the time complexity is O(log n), where n is the number of elements in the list.
             </li>
@@ -103,9 +103,9 @@ const BinarySearch = () => {
             </li>
           </ul>
         </div>
-        <div>
+        <div className="outline outline-2 outline-slate-100 p-5">
         <span className="underline decoration-red-500 text-2xl">Cons</span>
-        <ul className="list-disc">
+        <ul className="list-disc pl-5">
           <li>
           Requires the entire array to be sorted before performing the search, which can add extra overhead if the list is not already sorted.
           </li>
