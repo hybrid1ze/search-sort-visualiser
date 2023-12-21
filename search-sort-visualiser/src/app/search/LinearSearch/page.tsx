@@ -86,49 +86,28 @@ const LinearSearch = () => {
           Reset
         </button>
       </div>
-      <div className="flex flex-row justify-between pt-32 px-2">
-        <div className="outline outline-2 outline-slate-100 p-5">
-          <span className="underline decoration-green-500 text-2xl">Pros</span>
-          <ul className="list-disc pl-5">
-            <li>
-            Simple and easy to implement.
-            </li>
-            <li>
-            Works on unsorted and sorted lists.
-            </li>
-            <li>
-            Requires minimal additional memory to perform the search.
-            </li>
-            <li>
-            It can be used on various data structures, including arrays, linked lists, and other sequential data structures.   
-            </li>
-            <li>
-            Simple search algorithm.   
-            </li>
-            <li>
-            Best when looking for a single element.
-            </li>
-          </ul>
-        </div>
-        <div className="outline outline-2 outline-slate-100 p-5">
-        <span className="underline decoration-red-500 text-2xl">Cons</span>
-        <ul className="list-disc pl-5">
-          <li>
-          Has the worst execution time for large lists or arrays.
-          </li>
-          <li>
-          The worst-case complexity is O(n), which means that the search time increases linearly with the size of the list or array.
-          </li>
-          <li>
-          Not efficient for searching in sorted arrays or lists.
-          </li>
-          <li>
-          It may have to examine the list of elements even if the target value is found early in the list, which can be inefficient, especially when searching for a single element.
-          </li>
-        </ul>
-        </div>
-      </div>
-
+      <div className="grid grid-cols-2 gap-4 pt-32 px-2">
+  <div className="outline outline-2 outline-slate-100 p-5">
+    <span className="underline decoration-green-500 text-2xl">Pros</span>
+    <ul className="list-disc pl-5">
+      <li>Simple and easy to implement.</li>
+      <li>Works on unsorted and sorted lists.</li>
+      <li>Requires minimal additional memory to perform the search.</li>
+      <li>It can be used on various data structures, including arrays, linked lists, and other sequential data structures.</li>
+      <li>Simple search algorithm.</li>
+      <li>Best when looking for a single element.</li>
+    </ul>
+  </div>
+  <div className="outline outline-2 outline-slate-100 p-5">
+    <span className="underline decoration-red-500 text-2xl">Cons</span>
+    <ul className="list-disc pl-5">
+      <li>Has the worst execution time for large lists or arrays.</li>
+      <li>The worst-case complexity is O(n), which means that the search time increases linearly with the size of the list or array.</li>
+      <li>Not efficient for searching in sorted arrays or lists.</li>
+      <li>It may have to examine the list of elements even if the target value is found early in the list, which can be inefficient, especially when searching for a single element.</li>
+    </ul>
+  </div>
+</div>
     </div>
   );
 };
