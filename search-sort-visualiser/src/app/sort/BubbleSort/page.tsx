@@ -4,32 +4,33 @@ import React, { useState, useEffect } from "react";
 const generateRandomArray = (size: number, max: number): number[] =>
   Array.from({ length: size }, () => Math.floor(Math.random() * max));
 
-const BubbleSortVisualization = () => {
-  const [array, setArray] = useState<number[]>(generateRandomArray(10, 100));
+const BubbleSortVisualisation = () => {
+  const [array, setArray] = useState<number[]>([]);
   const [sorted, setSorted] = useState<boolean>(false);
   const [activeIndices, setActiveIndices] = useState<[number, number] | null>(
     null
   );
   const [isResetting, setIsResetting] = useState<boolean>(false); // New state to handle reset status
   const [tooltip, setTooltip] = useState<string>("");
+  const [resetCounter, setResetCounter] = useState(0);
 
-  const normalizeHeight = (value: number, maxValue: number) => {
-    const containerHeight = 100; // Assuming the container height is 100px
-    return (value / maxValue) * containerHeight;
-  };
+  useEffect(() => {
+    setArray(generateRandomArray(10, 100));
+  }, []);
 
   useEffect(() => {
     if (isResetting) {
-      const newArray = generateRandomArray(10, 100);
-      setArray(newArray);
+      setArray(generateRandomArray(10, 100)); // generate a new array
       setSorted(false);
       setActiveIndices(null);
       setIsResetting(false); // Reset completed
+      setTooltip("Array has been reset.");
     }
   }, [isResetting]);
 
   const resetSort = () => {
     setIsResetting(true); // Initiate reset
+    setResetCounter((prev) => prev + 1);
     setTooltip("Array has been reset.");
   };
 
@@ -58,14 +59,39 @@ const BubbleSortVisualization = () => {
     setArray(newArray);
   };
 
-  const maxValue = Math.max(...array);
+  const maxBarValue = Math.max(...array, 1);
 
   return (
     <div className="p-4">
-        <div className="flex justify-center text-4xl">
+      <div className="flex justify-center text-4xl">
         <h1>Bubble Sort Visualisation</h1>
       </div>
-      <div className="flex justify-center">
+
+      <div
+        className="mt-8 flex justify-center items-end"
+        style={{ gap: "2px", height: "100px" }}
+      >
+        {array.map((value, index) => {
+          // Normalize the height of the bar so that the tallest bar is 100px
+          const barHeight = (value / maxBarValue) * 100;
+
+          return (
+            <div key={`${resetCounter}-${index}`} className="flex flex-col items-center" style={{ width: '50px' }}>
+              <div
+                className={`bg-blue-500 ${activeIndices?.includes(index) ? 'bg-green-500' : ''}`}
+                style={{
+                  height: `${barHeight}px`, // Use pixel value here
+                  width: '100%', // Full width of the parent flex item
+                  transition: 'height 0.3s ease',
+                }}
+              ></div>
+              <span className="text-xs mt-1">{value}</span> {/* Display the value under the bar */}
+            </div>
+          );
+        })}
+      </div>
+
+      <div className="mt-4 mb-4 flex justify-center">
         <button
           onClick={bubbleSortStep}
           className="bg-blue-500 text-white p-2 ml-2"
@@ -77,32 +103,42 @@ const BubbleSortVisualization = () => {
           Reset
         </button>
       </div>
-      <div
-        className="mt-4 flex justify-center space-x-1"
-        style={{ height: "100px" }}
-      >
-        {array.map((value, index) => {
-          // Use the normalizeHeight function to calculate bar height
-          const barHeight = normalizeHeight(value, maxValue);
-          return (
-            <div
-              key={index}
-              className={`w-4 bg-blue-500 ${
-                activeIndices?.includes(index) ? "bg-red-500" : ""
-              }`}
-              style={{
-                height: `${barHeight}px`,
-                transition: "height 0.3s ease",
-              }}
-            />
-          );
-        })}
-      </div>
       <div className="mt-4 mb-4 flex justify-center">
         <span className="text-sm text-gray-600">{tooltip}</span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 pt-32 px-2">
+        <div className="outline outline-2 outline-slate-100 p-5">
+          <span className="underline decoration-green-500 text-2xl">Pros</span>
+          <ul className="list-disc pl-5">
+            <li>
+              Ternary search can be more efficient than binary search when the
+              array is vast, as it reduces the search space by two-thirds at
+              each iteration.
+            </li>
+            <li>It works on both sorted and unsorted arrays.</li>
+            <li>Ternary search is a simple algorithm to implement.</li>
+          </ul>
+        </div>
+        <div className="outline outline-2 outline-slate-100 p-5">
+          <span className="underline decoration-red-500 text-2xl">Cons</span>
+          <ul className="list-disc pl-5">
+            <li>
+              Ternary search can be less efficient than binary search when the
+              array is small, which may increase the comparison count.
+            </li>
+            <li>
+              It is not suitable for non-ordered or randomly ordered arrays.
+            </li>
+            <li>
+              Ternary search requires more comparisons than binary search,
+              sometimes making it slower.
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
 };
 
-export default BubbleSortVisualization;
+export default BubbleSortVisualisation;
