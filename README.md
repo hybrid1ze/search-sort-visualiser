@@ -1,6 +1,6 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Search and Sort Visualizations
+## Search and Sort Visualisations
 
 An interactive tool visualising search and sort algorithms in real-time.
 
