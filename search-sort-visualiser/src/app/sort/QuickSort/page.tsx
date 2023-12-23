@@ -31,43 +31,64 @@ const QuickSortVisualization = () => {
     setTooltip("Array reset. Ready to sort!");
   };
 
-  const partition = (arr: number[], left: number, right: number): number => {
-    let pivot = arr[right];
-    setTooltip(`Pivot selected at index ${right}.`);
-    let i = left;
-    for (let j = left; j < right; j++) {
-      if (arr[j] < pivot) {
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-        i++;
-      }
-    }
-    [arr[i], arr[right]] = [arr[right], arr[i]];
-    return i;
-  };
+// Function to partition the array around a pivot
+const partition = (arr: number[], left: number, right: number): number => {
+        // Choose the rightmost element as pivot
+        let pivot = arr[right];
+        // Update the tooltip to show the pivot selection
+        setTooltip(`Pivot selected at index ${right}.`);
+        // Initialize the partition index
+        let i = left;
+        // Iterate over the elements in the current segment
+        for (let j = left; j < right; j++) {
+            // If the current element is less than the pivot, swap it with the element at the partition index
+            if (arr[j] < pivot) {
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+                // Increment the partition index
+                i++;
+            }
+        }
+        // Swap the pivot with the element at the partition index
+        [arr[i], arr[right]] = [arr[right], arr[i]];
+        // Return the partition index
+        return i;
+};
 
-  const quickSortStep = (): void => {
-    if (activeSegments.length === 0) {
-      setIsSorted(true);
-      setTooltip("Array is fully sorted!");
-      return;
-    }
+// Function to perform a step in the quicksort
+const quickSortStep = (): void => {
+        // If there are no more active segments, the array is fully sorted
+        if (activeSegments.length === 0) {
+            setIsSorted(true);
+            setTooltip("Array is fully sorted!");
+            return;
+        }
 
-    const segments = [...activeSegments];
-    const { left, right } = segments.pop() as Segment;
+        // Copy the active segments array
+        const segments = [...activeSegments];
+        // Pop the last segment from the array
+        const { left, right } = segments.pop() as Segment;
 
-    if (left < right) {
-      const index = partition(array, left, right);
-      setArray([...array]);
-      setPivotIndex(index);
-      segments.push({ left: index + 1, right });
-      segments.push({ left, right: index - 1 });
-      setTooltip(`Partitioning at pivot index ${index}.`);
-    } else {
-      setTooltip(`No more elements to sort in current segment.`);
-    }
+        // If the segment has more than one element
+        if (left < right) {
+            // Partition the segment around the pivot and get the partition index
+            const index = partition(array, left, right);
+            // Update the array state
+            setArray([...array]);
+            // Update the pivot index state
+            setPivotIndex(index);
+            // Push the segments to the right and left of the pivot to the active segments array
+            segments.push({ left: index + 1, right });
+            segments.push({ left, right: index - 1 });
+            // Update the tooltip to show the partitioning
+            setTooltip(`Partitioning at pivot index ${index}.`);
+        } else {
+            // If the segment has one or zero elements, it is already sorted
+            setTooltip(`No more elements to sort in current segment.`);
+        }
 
-    setActiveSegments(segments);
-  };
+        // Update the active segments state
+        setActiveSegments(segments);
+};
 
   return (
     <div className="p-4">
