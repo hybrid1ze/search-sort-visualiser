@@ -61,15 +61,54 @@ const TernarySearchVisualization = () => {
   };
   return (
     <div className="p-4">
-      <div className="flex justify-center">
-        {/* Input and buttons */}
+        <div className="flex justify-center text-4xl">
+        <h1>Ternary Search Visualisation</h1>
       </div>
+      
       <div className="mt-4 flex justify-center">
-        {/* Array visualization */}
+      {array.map((value, index) => (
+        <span
+          key={index}
+          className={`inline-block m-1 p-2 border w-12 text-center 
+                      ${index >= bounds.lower && index <= bounds.upper ? 'bg-green-300' : ''}
+                      ${isFound === true && index === bounds.lower ? 'bg-blue-500' : ''}
+                      ${isFound === false ? 'opacity-50' : 'opacity-100'}`}
+        >
+          {value}
+        </span>
+      ))}
+    </div>
+    {isFound !== null && (
+        <div className="mt-4 mb-4 flex justify-center">
+          {isFound ? "Element found!" : "Element not found."}
+        </div>
+      )}
+      <div className="mt-4 mb-4 flex justify-center">
+        <input
+          type="number"
+          className="border-2 border-gray-200 p-2"
+          placeholder="Enter a number to search"
+          value={target !== null ? target : ""}
+          onChange={(e) => setTarget(parseInt(e.target.value, 10))}
+        />
+        <button
+          onClick={ternarySearchStep}
+          className="bg-blue-500 text-white p-2 ml-2"
+        >
+          Next Step
+        </button>
+        <button
+          onClick={resetSearch}
+          className="bg-red-500 text-white p-2 ml-2"
+        >
+          Reset
+        </button>
       </div>
-      <div className="mt-4">
-        {/* Tooltip and search results */}
+      <div className="mt-4 mb-4 flex justify-center">
+        <span className="text-sm text-gray-600">{tooltip}</span>
       </div>
+      
+    
     </div>
   );
 };
