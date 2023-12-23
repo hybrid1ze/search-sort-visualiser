@@ -130,7 +130,7 @@ const MergeSortVisualization = () => {
         style={{ gap: "2px", height: "100px" }}
       >
         {array.map((value, index) => (
-          <div key={index} style={{ width: "50px" }}>
+          <div key={index} style={{ width: "50px" }} className="flex flex-col items-center">
             <div
               className={`bg-blue-500 ${
                 highlightedIndices &&
