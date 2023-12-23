@@ -1,24 +1,30 @@
 "use client";
 import React, { useState, useEffect } from "react";
 
+// Function to generate a sorted array of random numbers
 const generateSortedArray = (size: number, max: number) =>
   Array.from({ length: size }, () => Math.floor(Math.random() * max)).sort(
     (a, b) => a - b
   );
 
 const JumpSearchVisualisation = () => {
+  // State variables for the array, target number, block start and end indices, search result, and tooltip message
   const [array, setArray] = useState<number[]>([]);
   const [target, setTarget] = useState<number | null>(null);
   const [blockStart, setBlockStart] = useState<number | null>(null);
   const [blockEnd, setBlockEnd] = useState<number | null>(null);
   const [isFound, setIsFound] = useState<boolean | null>(null);
   const [tooltip, setTooltip] = useState<string>("");
-  const blockSize = Math.floor(Math.sqrt(array.length)); // Block size for jump search
 
+  // Block size for jump search
+  const blockSize = Math.floor(Math.sqrt(array.length));
+
+  // Reset the search when the component mounts
   useEffect(() => {
     resetSearch();
   }, []);
 
+  // Function to reset the search
   const resetSearch = () => {
     setArray(generateSortedArray(20, 100));
     setBlockStart(null);
@@ -27,6 +33,7 @@ const JumpSearchVisualisation = () => {
     setTooltip("Array has been reset.");
   };
 
+  // Function to perform a step in the jump search
   const jumpSearchStep = () => {
     if (target === null) {
       setTooltip("No target number specified.");
@@ -56,6 +63,8 @@ const JumpSearchVisualisation = () => {
       );
     }
   };
+
+  // Render the component
 
   return (
     <div className="p-4">
