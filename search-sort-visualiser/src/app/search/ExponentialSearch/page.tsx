@@ -28,48 +28,61 @@ const ExponentialSearchVisualization = () => {
     setTooltip("Array has been reset.");
   };
 
-  const exponentialSearchStep = () => {
+// Function to perform a step in the exponential search
+const exponentialSearchStep = () => {
+    // Check if a target number has been specified
     if (target === null) {
-      setTooltip("No target number specified.");
-      return;
+        setTooltip("No target number specified.");
+        return;
     }
 
+    // If the upper bound is within the array and the element at the upper bound is less than the target
     if (bounds.upper < array.length && array[bounds.upper] < target) {
-      const newUpper = Math.min(bounds.upper * 2, array.length);
-      setBounds({ lower: bounds.upper, upper: newUpper });
-      setTooltip(
-        `Expanding search range to indices ${bounds.upper} to ${newUpper}.`
-      );
+        // Double the upper bound
+        const newUpper = Math.min(bounds.upper * 2, array.length);
+        // Update the search bounds
+        setBounds({ lower: bounds.upper, upper: newUpper });
+        setTooltip(
+            `Expanding search range to indices ${bounds.upper} to ${newUpper}.`
+        );
     } else {
-      const result = binarySearch(
-        array,
-        target,
-        bounds.lower,
-        Math.min(bounds.upper, array.length - 1)
-      );
-      setIsFound(result !== -1);
-      if (result !== -1) {
-        // Update bounds to only include the found element
-        setBounds({ lower: result, upper: result });
-        setTooltip(`Element found at index ${result}.`);
-      } else {
-        setTooltip("Element not found.");
-      }
+        // Perform binary search within the current bounds
+        const result = binarySearch(
+            array,
+            target,
+            bounds.lower,
+            Math.min(bounds.upper, array.length - 1)
+        );
+        // Update the search result
+        setIsFound(result !== -1);
+        if (result !== -1) {
+            // If the element is found, update bounds to only include the found element
+            setBounds({ lower: result, upper: result });
+            setTooltip(`Element found at index ${result}.`);
+        } else {
+            setTooltip("Element not found.");
+        }
     }
-  };
+};
 
-  const binarySearch = (
+// Function to perform binary search
+const binarySearch = (
     arr: number[],
     x: number,
     start: number,
     end: number
-  ): number => {
+): number => {
+    // If the start index is greater than the end index, the element is not in the array
     if (start > end) return -1;
+    // Calculate the middle index
     const mid = Math.floor((start + end) / 2);
+    // If the element at the middle index is the target, return the middle index
     if (arr[mid] === x) return mid;
+    // If the element at the middle index is greater than the target, search in the left half
     if (arr[mid] > x) return binarySearch(arr, x, start, mid - 1);
+    // Otherwise, search in the right half
     return binarySearch(arr, x, mid + 1, end);
-  };
+};
 
   return (
     <div className="p-4">
