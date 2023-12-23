@@ -16,33 +16,52 @@ const InsertionSortVisualisation = () => {
     setIsSorting(true);
   }, []);
 
-  const insertionSortStep = () => {
+// Function to perform a step in the insertion sort
+const insertionSortStep = () => {
+    // Check if the current index is within the array
     if (currentIdx < array.length) {
-      let newArray = [...array];
-      let key = newArray[currentIdx];
-      let j = currentIdx - 1;
+        // Create a copy of the array
+        let newArray = [...array];
+        // Get the key element at the current index
+        let key = newArray[currentIdx];
+        // Initialize the comparison index to one less than the current index
+        let j = currentIdx - 1;
 
-      while (j >= 0 && newArray[j] > key) {
-        newArray[j + 1] = newArray[j];
-        j--;
-      }
+        // While the comparison index is within the array and the element at the comparison index is greater than the key
+        while (j >= 0 && newArray[j] > key) {
+            // Shift the element at the comparison index to the right
+            newArray[j + 1] = newArray[j];
+            // Decrement the comparison index
+            j--;
+        }
 
-      newArray[j + 1] = key;
-      setArray(newArray);
-      setCurrentIdx(currentIdx + 1);
-      setTooltip(`Inserting ${key} at position ${j + 1}`);
+        // Insert the key at the correct position
+        newArray[j + 1] = key;
+        // Update the array
+        setArray(newArray);
+        // Move to the next index
+        setCurrentIdx(currentIdx + 1);
+        // Update the tooltip
+        setTooltip(`Inserting ${key} at position ${j + 1}`);
     } else {
-      setIsSorting(false);
-      setTooltip("Array is fully sorted.");
+        // If the entire array has been sorted, stop sorting
+        setIsSorting(false);
+        // Update the tooltip
+        setTooltip("Array is fully sorted.");
     }
-  };
+};
 
-  const resetSort = () => {
+// Function to reset the sort
+const resetSort = () => {
+    // Generate a new random array
     setArray(generateRandomArray(10, 100));
+    // Reset the current index
     setCurrentIdx(1);
+    // Start sorting
     setIsSorting(true);
+    // Update the tooltip
     setTooltip("Array has been reset.");
-  };
+};
 
   const maxValue = Math.max(...array, 1);
 
