@@ -7,7 +7,7 @@ const generateSortedArray = (size: number, max: number): number[] =>
   );
 
 const ExponentialSearchVisualization = () => {
-  const [array, setArray] = useState<number[]>(generateSortedArray(20, 100));
+  const [array, setArray] = useState<number[]>([]);
   const [target, setTarget] = useState<number | null>(null);
   const [bounds, setBounds] = useState<{ lower: number; upper: number }>({
     lower: 0,
