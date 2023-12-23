@@ -1,12 +1,14 @@
 "use client";
 import { useState, useEffect } from "react";
 
+// Function to generate a sorted array of random numbers
 const generateSortedRandomArray = (size: number, max: number) =>
   Array.from({ length: size }, () => Math.floor(Math.random() * max)).sort(
     (a, b) => a - b
   );
 
 const InterpolationSearch = () => {
+  // State variables for the array, target number, low, high, mid, isFound and tooltip
   const [array, setArray] = useState<number[]>([]);
   const [target, setTarget] = useState<number | null>(null);
   const [low, setLow] = useState<number>(0);
@@ -15,6 +17,7 @@ const InterpolationSearch = () => {
   const [isFound, setIsFound] = useState<boolean | null>(null);
   const [tooltip, setTooltip] = useState<string>("");
 
+  // Function to reset the search
   const resetSearch = () => {
     const newArray = generateSortedRandomArray(20, 100);
     setArray(newArray);
@@ -23,25 +26,30 @@ const InterpolationSearch = () => {
     setMid(null);
     setIsFound(null);
     setTarget(null);
-    setTooltip("Search has been reset.");
+    setTooltip("Array has been reset.");
   };
 
+  // Effect to reset the search when the component mounts
   useEffect(() => {
     resetSearch();
   }, []);
 
+  // Function to perform a step of the interpolation search
   const interpolationSearchStep = () => {
+    // Check if a target number has been specified
     if (target === null) {
       setTooltip("No target number specified.");
       return;
     }
 
+    // Check if the target number is out of the range of the array
     if (low > high || target < array[low] || target > array[high]) {
       setIsFound(false);
       setTooltip("Target is not in the array.");
       return;
     }
 
+    // Calculate the position to check in the array
     let position =
       low +
       Math.floor(
@@ -50,10 +58,12 @@ const InterpolationSearch = () => {
     position = Math.max(low, Math.min(position, high));
     setMid(position);
 
+    // Check if the target number has been found
     if (array[position] === target) {
       setIsFound(true);
       setTooltip(`Element found at position ${position + 1}.`);
     } else {
+      // If not found, adjust the search range
       if (array[position] < target) {
         setLow(position + 1);
         setTooltip(
@@ -69,6 +79,7 @@ const InterpolationSearch = () => {
     }
   };
 
+  // Render the component
   return (
     <div className="p-4">
       <div className="flex justify-center text-4xl">
