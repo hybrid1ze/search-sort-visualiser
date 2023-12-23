@@ -76,16 +76,23 @@ const BubbleSortVisualisation = () => {
           const barHeight = (value / maxBarValue) * 100;
 
           return (
-            <div key={`${resetCounter}-${index}`} className="flex flex-col items-center" style={{ width: '50px' }}>
+            <div
+              key={`${resetCounter}-${index}`}
+              className="flex flex-col items-center"
+              style={{ width: "50px" }}
+            >
               <div
-                className={`bg-blue-500 ${activeIndices?.includes(index) ? 'bg-green-500' : ''}`}
+                className={`bg-blue-500 ${
+                  activeIndices?.includes(index) ? "bg-green-500" : ""
+                }`}
                 style={{
                   height: `${barHeight}px`, // Use pixel value here
-                  width: '100%', // Full width of the parent flex item
-                  transition: 'height 0.3s ease',
+                  width: "100%", // Full width of the parent flex item
+                  transition: "height 0.3s ease",
                 }}
               ></div>
-              <span className="text-xs mt-1">{value}</span> {/* Display the value under the bar */}
+              <span className="text-xs mt-1">{value}</span>{" "}
+              {/* Display the value under the bar */}
             </div>
           );
         })}
@@ -111,28 +118,32 @@ const BubbleSortVisualisation = () => {
         <div className="outline outline-2 outline-slate-100 p-5">
           <span className="underline decoration-green-500 text-2xl">Pros</span>
           <ul className="list-disc pl-5">
+            <li>Bubble sort is simple to understand and implement.</li>
             <li>
-              Ternary search can be more efficient than binary search when the
-              array is vast, as it reduces the search space by two-thirds at
-              each iteration.
+              It doesn&apos;t require any extra space as it sorts the list
+              in-place.
             </li>
-            <li>It works on both sorted and unsorted arrays.</li>
-            <li>Ternary search is a simple algorithm to implement.</li>
+            <li>
+              It is a stable sorting algorithm, i.e., it maintains the relative
+              order of equal elements.
+            </li>
+            <li>
+              It can detect an already sorted list in linear time (O(n)) due to
+              its property of stopping if no swap has occurred.
+            </li>
           </ul>
         </div>
         <div className="outline outline-2 outline-slate-100 p-5">
           <span className="underline decoration-red-500 text-2xl">Cons</span>
           <ul className="list-disc pl-5">
             <li>
-              Ternary search can be less efficient than binary search when the
-              array is small, which may increase the comparison count.
+            Bubble sort has a worst-case and average time complexity of O(sqrt(n)), where n is the number of items being sorted. This makes it inefficient for large datasets.
             </li>
             <li>
-              It is not suitable for non-ordered or randomly ordered arrays.
+            Due to its time complexity, it is not suitable for large datasets.
             </li>
             <li>
-              Ternary search requires more comparisons than binary search,
-              sometimes making it slower.
+            Other algorithms such as QuickSort, MergeSort, HeapSort can perform much better and are preferred over Bubble Sort.
             </li>
           </ul>
         </div>
