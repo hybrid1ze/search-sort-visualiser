@@ -15,43 +15,54 @@ const SelectionSortVisualisation = () => {
     setArray(generateRandomArray(10, 100));
   }, []);
 
-  const selectionSortStep = () => {
-    // If the sorting is already complete
-    if (sortedIndex >= array.length - 1) {
-      setIsSorting(false);
-      setTooltip("Array is fully sorted.");
-      return;
-    }
+const selectionSortStep = () => {
+        // If the sorting is already complete
+        if (sortedIndex >= array.length - 1) {
+            // Stop the sorting process
+            setIsSorting(false);
+            // Update the tooltip to indicate that the array is fully sorted
+            setTooltip("Array is fully sorted.");
+            return;
+        }
 
-    let minIndex = sortedIndex + 1;
-    for (let i = minIndex + 1; i < array.length; i++) {
-      if (array[i] < array[minIndex]) {
-        minIndex = i;
-      }
-    }
+        // Initialize the minimum index to the first unsorted element
+        let minIndex = sortedIndex + 1;
+        // Iterate over the unsorted part of the array
+        for (let i = minIndex + 1; i < array.length; i++) {
+            // If the current element is less than the current minimum, update the minimum index
+            if (array[i] < array[minIndex]) {
+                minIndex = i;
+            }
+        }
 
-    // Always perform the swap
-    const newArray = [...array];
-    [newArray[sortedIndex + 1], newArray[minIndex]] = [
-      newArray[minIndex],
-      newArray[sortedIndex + 1],
-    ];
-    setArray(newArray);
+        // Always perform the swap
+        const newArray = [...array];
+        // Swap the first unsorted element with the minimum element
+        [newArray[sortedIndex + 1], newArray[minIndex]] = [
+            newArray[minIndex],
+            newArray[sortedIndex + 1],
+        ];
+        // Update the array
+        setArray(newArray);
 
-    // Move to the next index
-    setSortedIndex(sortedIndex + 1);
+        // Move the sorted/unsorted boundary to the right
+        setSortedIndex(sortedIndex + 1);
 
-    // Check if this was the last necessary swap
-    if (sortedIndex + 1 >= array.length - 1) {
-      setIsSorting(false);
-      setTooltip("Array is fully sorted.");
-    } else {
-      setCurrentMinIndex(minIndex);
-      setTooltip(
-        `Swapped elements at indices ${sortedIndex + 1} and ${minIndex}.`
-      );
-    }
-  };
+        // Check if this was the last necessary swap
+        if (sortedIndex + 1 >= array.length - 1) {
+            // If so, stop the sorting process
+            setIsSorting(false);
+            // Update the tooltip to indicate that the array is fully sorted
+            setTooltip("Array is fully sorted.");
+        } else {
+            // Otherwise, update the current minimum index
+            setCurrentMinIndex(minIndex);
+            // Update the tooltip to indicate the swap
+            setTooltip(
+                `Swapped elements at indices ${sortedIndex + 1} and ${minIndex}.`
+            );
+        }
+    };
 
   const resetSort = () => {
     setArray(generateRandomArray(10, 100));
