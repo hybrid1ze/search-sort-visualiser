@@ -72,7 +72,7 @@ const BubbleSortVisualisation = () => {
         style={{ gap: "2px", height: "100px" }}
       >
         {array.map((value, index) => {
-          // Normalize the height of the bar so that the tallest bar is 100px
+          // Normalise the height of the bar so that the tallest bar is 100px
           const barHeight = (value / maxBarValue) * 100;
 
           return (
@@ -92,7 +92,7 @@ const BubbleSortVisualisation = () => {
                 }}
               ></div>
               <span className="text-xs mt-1">{value}</span>{" "}
-              {/* Display the value under the bar */}
+              
             </div>
           );
         })}

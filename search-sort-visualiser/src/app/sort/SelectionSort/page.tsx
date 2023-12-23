@@ -86,13 +86,17 @@ const SelectionSortVisualisation = () => {
           if (index <= sortedIndex) barColor = "bg-green-500";
 
           return (
-            <div key={index} className="flex flex-col items-center w-10">
+            <div
+              key={index}
+              className="flex flex-col items-center"
+              style={{ width: "50px" }}
+            >
               <div
                 className={`${barColor}`}
                 style={{ height: `${barHeight}px`, width: "100%" }}
               ></div>
               <span className="text-xs mt-1">{value}</span>{" "}
-              {/* Display the value below the bar */}
+              
             </div>
           );
         })}
@@ -113,6 +117,45 @@ const SelectionSortVisualisation = () => {
 
       <div className="mt-4 mb-4 flex justify-center">
         <span className="text-sm text-gray-600">{tooltip}</span>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4 pt-32 px-2">
+        <div className="outline outline-2 outline-slate-100 p-5">
+          <span className="underline decoration-green-500 text-2xl">Pros</span>
+          <ul className="list-disc pl-5">
+            <li>Selection sort is simple to understand and implement.</li>
+            <li>
+              It doesn&apos;t require any extra space as it sorts the list
+              in-place.
+            </li>
+            <li>For small lists, it can be efficient due to its simplicity.</li>
+            <li>
+              It performs the same number of comparisons regardless of the order
+              of the input.
+            </li>
+          </ul>
+        </div>
+        <div className="outline outline-2 outline-slate-100 p-5">
+          <span className="underline decoration-red-500 text-2xl">Cons</span>
+          <ul className="list-disc pl-5">
+            <li>
+              Selection sort has a worst-case and average time complexity of
+              O(sqrt(n)), where n is the number of items being sorted. This
+              makes it inefficient for large datasets.
+            </li>
+            <li>
+              Due to its time complexity, it is not suitable for large datasets.
+            </li>
+            <li>
+              Other algorithms such as QuickSort, MergeSort, HeapSort can
+              perform much better and are preferred over Selection Sort.
+            </li>
+            <li>
+              It is an unstable sorting algorithm, i.e., it does not maintain
+              the relative order of equal elements.
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
