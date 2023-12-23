@@ -30,60 +30,75 @@ const TernarySearchVisualization = () => {
     setTooltip("Array has been reset.");
   };
 
-  const ternarySearchStep = () => {
+// Function to perform a step in the ternary search
+const ternarySearchStep = () => {
+    // Check if a target number has been specified
     if (target === null) {
-      setTooltip("No target number specified.");
-      return;
+        setTooltip("No target number specified.");
+        return;
     }
-  
+
+    // Get the current search bounds
     const { lower, upper } = bounds;
+
+    // If the lower bound is greater than the upper bound, the element is not in the array
     if (lower > upper) {
-      setIsFound(false);
-      setTooltip("Element not found.");
-      return;
+        setIsFound(false);
+        setTooltip("Element not found.");
+        return;
     }
-  
+
+    // Calculate the indices that partition the current range into thirds
     const partitionSize = Math.floor((upper - lower) / 3);
     const mid1 = lower + partitionSize;
     const mid2 = upper - partitionSize;
-  
+
+    // If the element at the first partition index is the target, update the search result and bounds
     if (array[mid1] === target) {
-      setIsFound(true);
-      setBounds({ lower: mid1, upper: mid1 });
-      setTooltip(`Element found at index ${mid1}.`);
-    } else if (array[mid2] === target) {
-      setIsFound(true);
-      setBounds({ lower: mid2, upper: mid2 });
-      setTooltip(`Element found at index ${mid2}.`);
-    } else if (target < array[mid1]) {
-      // Check if new bounds are valid
-      if (lower < mid1) {
-        setBounds({ lower, upper: mid1 - 1 });
-        setTooltip(`Searching in the first third: indices ${lower} to ${mid1 - 1}.`);
-      } else {
-        setIsFound(false);
-        setTooltip("Element not found.");
-      }
-    } else if (target > array[mid2]) {
-      // Check if new bounds are valid
-      if (mid2 + 1 <= upper) {
-        setBounds({ lower: mid2 + 1, upper });
-        setTooltip(`Searching in the third third: indices ${mid2 + 1} to ${upper}.`);
-      } else {
-        setIsFound(false);
-        setTooltip("Element not found.");
-      }
-    } else {
-      // Check if new bounds are valid
-      if (mid1 + 1 <= mid2 - 1) {
-        setBounds({ lower: mid1 + 1, upper: mid2 - 1 });
-        setTooltip(`Searching in the second third: indices ${mid1 + 1} to ${mid2 - 1}.`);
-      } else {
-        setIsFound(false);
-        setTooltip("Element not found.");
-      }
+        setIsFound(true);
+        setBounds({ lower: mid1, upper: mid1 });
+        setTooltip(`Element found at index ${mid1}.`);
+    } 
+    // If the element at the second partition index is the target, update the search result and bounds
+    else if (array[mid2] === target) {
+        setIsFound(true);
+        setBounds({ lower: mid2, upper: mid2 });
+        setTooltip(`Element found at index ${mid2}.`);
+    } 
+    // If the target is less than the element at the first partition index, search in the first third
+    else if (target < array[mid1]) {
+        // Check if new bounds are valid
+        if (lower < mid1) {
+            setBounds({ lower, upper: mid1 - 1 });
+            setTooltip(`Searching in the first third: indices ${lower} to ${mid1 - 1}.`);
+        } else {
+            setIsFound(false);
+            setTooltip("Element not found.");
+        }
+    } 
+    // If the target is greater than the element at the second partition index, search in the third third
+    else if (target > array[mid2]) {
+        // Check if new bounds are valid
+        if (mid2 + 1 <= upper) {
+            setBounds({ lower: mid2 + 1, upper });
+            setTooltip(`Searching in the third third: indices ${mid2 + 1} to ${upper}.`);
+        } else {
+            setIsFound(false);
+            setTooltip("Element not found.");
+        }
+    } 
+    // Otherwise, search in the second third
+    else {
+        // Check if new bounds are valid
+        if (mid1 + 1 <= mid2 - 1) {
+            setBounds({ lower: mid1 + 1, upper: mid2 - 1 });
+            setTooltip(`Searching in the second third: indices ${mid1 + 1} to ${mid2 - 1}.`);
+        } else {
+            setIsFound(false);
+            setTooltip("Element not found.");
+        }
     }
-  };
+};
   
   return (
     <div className="p-4">
