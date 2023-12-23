@@ -59,4 +59,18 @@ const TernarySearchVisualization = () => {
       setTooltip(`Searching in the second third: indices ${mid1 + 1} to ${mid2 - 1}.`);
     }
   };
+  return (
+    <div className="p-4">
+      <div className="flex justify-center">
+        {/* Input and buttons */}
+      </div>
+      <div className="mt-4 flex justify-center">
+        {/* Array visualization */}
+      </div>
+      <div className="mt-4">
+        {/* Tooltip and search results */}
+      </div>
+    </div>
+  );
 };
+export default TernarySearchVisualization;
