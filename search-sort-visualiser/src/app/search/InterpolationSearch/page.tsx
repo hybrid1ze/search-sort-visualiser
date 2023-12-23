@@ -61,6 +61,10 @@ const InterpolationSearch = () => {
     // Check if the target number has been found
     if (array[position] === target) {
       setIsFound(true);
+      setMid(position);
+      // Narrow down the search range to only include the found element
+      setLow(position);
+      setHigh(position);
       setTooltip(`Element found at position ${position + 1}.`);
     } else {
       // If not found, adjust the search range
