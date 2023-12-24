@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import BackButton from "@/app/components/BackButton";
 
 // Function to generate a sorted array of random numbers
 const generateSortedRandomArray = (size: number, max: number) =>
@@ -89,6 +90,7 @@ const InterpolationSearch = () => {
       <div className="flex justify-center text-4xl">
         <h1>Interpolation Search Visualisation</h1>
       </div>
+      <BackButton />
 
       <div className="mt-4 flex justify-center">
         {array.map((value, index) => {
