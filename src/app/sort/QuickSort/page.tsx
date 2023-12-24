@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import BackButton from "@/app/components/BackButton";
 
 // Function to generate a random array
 const generateRandomArray = (size: number, max: number): number[] =>
@@ -95,6 +96,7 @@ const quickSortStep = (): void => {
       <div className="flex justify-center text-4xl">
         <h1>Quick Sort Visualization</h1>
       </div>
+      <BackButton />
 
       <div
         className="mt-8 flex justify-center items-end"

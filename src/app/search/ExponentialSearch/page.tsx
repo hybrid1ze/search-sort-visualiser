@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import BackButton from "@/app/components/BackButton";
 
 const generateSortedArray = (size: number, max: number): number[] =>
   Array.from({ length: size }, () => Math.floor(Math.random() * max)).sort(
@@ -89,6 +90,7 @@ const binarySearch = (
       <div className="flex justify-center text-4xl">
         <h1>Exponential Search Visualisation</h1>
       </div>
+      <BackButton />
       <div className="mt-4 flex justify-center">
         {array.map((value, index) => (
           <span

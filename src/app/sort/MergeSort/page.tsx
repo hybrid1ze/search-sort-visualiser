@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import BackButton from "@/app/components/BackButton";
 
 interface MergeStep {
   left: number;
@@ -124,6 +125,7 @@ const MergeSortVisualization = () => {
       <div className="flex justify-center text-4xl">
         <h1>Merge Sort Visualization</h1>
       </div>
+      <BackButton />
 
       <div
         className="mt-8 flex justify-center items-end"

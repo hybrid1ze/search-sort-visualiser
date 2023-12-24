@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import BackButton from "@/app/components/BackButton";
 
 // Function to generate a sorted array of random numbers
 const generateSortedArray = (size: number, max: number) =>
@@ -71,6 +72,7 @@ const JumpSearchVisualisation = () => {
       <div className="flex justify-center text-4xl">
         <h1>Jump Search Visualisation</h1>
       </div>
+      <BackButton />
 
       <div className="mt-4 flex justify-center">
         {array.map((value, index) => (

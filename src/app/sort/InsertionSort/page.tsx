@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import BackButton from "@/app/components/BackButton";
 
 const generateRandomArray = (size: number, max: number): number[] =>
   Array.from({ length: size }, () => Math.floor(Math.random() * max) + 1);
@@ -74,6 +75,7 @@ const resetSort = () => {
       <div className="flex justify-center text-4xl">
         <h1>Insertion Sort Visualisation</h1>
       </div>
+      <BackButton />
 
       <div
         className="mt-8 flex justify-center items-end"
